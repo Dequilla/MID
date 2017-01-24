@@ -28,17 +28,6 @@ void deq::CollisionChecker::checkCollisions()
 			{
 				dynamicCollider->intersects(*staticCollider, intersection); // Get the intersection data
 
-				// The dynamic collidercorners
-				Point northWest(dynamicCollider->left, dynamicCollider->top);
-				Point northEast(dynamicCollider->left + dynamicCollider->width, dynamicCollider->top);
-				Point southWest(dynamicCollider->left, dynamicCollider->top + dynamicCollider->height);
-				Point southEast(dynamicCollider->left + dynamicCollider->width, dynamicCollider->top + dynamicCollider->height);
-				
-				Point north(dynamicCollider->left + dynamicCollider->width / 2, dynamicCollider->top);
-				Point west(dynamicCollider->left, dynamicCollider->top + dynamicCollider->height / 2);
-				Point south(dynamicCollider->left + dynamicCollider->width / 2, dynamicCollider->top + dynamicCollider->height);
-				Point east(dynamicCollider->left + dynamicCollider->width, dynamicCollider->top + dynamicCollider->height / 2);
-
 				// Move only the smallest one
 				float heightMultiplier = 1;
 				float widthMultiplier = 1;
@@ -53,41 +42,29 @@ void deq::CollisionChecker::checkCollisions()
 				float actualX = widthMultiplier * intersection.width;
 				float actualY = heightMultiplier * intersection.height;
 
-				if (staticCollider->contains(north))
-				{
-					dynamicCollider->top += actualY;
-				}
-				else if (staticCollider->contains(south))
+				// Center point check, get direction
+				Point staticCenter(staticCollider->left + staticCollider->width / 2, staticCollider->top + staticCollider->height / 2);
+				Point dynamicCenter(dynamicCollider->left + dynamicCollider->width / 2, dynamicCollider->top + dynamicCollider->height / 2);
+
+				// Dynamic collider is above
+				if (dynamicCenter.y < staticCenter.y)
 				{
 					dynamicCollider->top -= actualY;
 				}
-				else if (staticCollider->contains(west))
+				// Dynamic collider is below
+				else if (dynamicCenter.y > staticCenter.y)
 				{
-					dynamicCollider->left += actualX;
+					dynamicCollider->top += actualY;
 				}
-				else if (staticCollider->contains(east))
+
+				// Dynamic collider is to the left
+				if (dynamicCenter.x < staticCenter.x)
 				{
 					dynamicCollider->left -= actualX;
 				}
-				else if (staticCollider->contains(northWest))
+				else if (dynamicCenter.x > staticCenter.x)
 				{
 					dynamicCollider->left += actualX;
-					dynamicCollider->top  += actualY;
-				}
-				else if (staticCollider->contains(northEast))
-				{
-					dynamicCollider->left -= actualX;
-					dynamicCollider->top  += actualY;
-				}
-				else if (staticCollider->contains(southEast))
-				{
-					dynamicCollider->left -= actualX;
-					dynamicCollider->top  -= actualY;
-				}
-				else if (staticCollider->contains(southWest))
-				{
-					dynamicCollider->left += actualX;
-					dynamicCollider->top  -= actualY;
 				}
 			}
 
