@@ -28,29 +28,14 @@ int main(int argc, char** argv)
 	sprite.addAnimation("none", std::vector<int>({ 1 }));
 	sprite.setAnimation("burn");
 
-	deq::AABB aabb;
-	aabb.isStatic = true;
-	aabb.left = 200;
-	aabb.top = 200;
-	aabb.width = 32;
-	aabb.height = 32;
-	deq::CollisionChecker::getInstance().addAABB(&aabb);
+	deq::AABB aabb(200, 200, 32, 32, true);
+	deq::addAABB(&aabb);
 
-	deq::AABB aabb2;
-	aabb2.isStatic = true;
-	aabb2.left = 232;
-	aabb2.top = 200;
-	aabb2.width = 32;
-	aabb2.height = 32;
-	deq::CollisionChecker::getInstance().addAABB(&aabb2);
+	deq::AABB aabb2(232, 200, 32, 32, true);
+	deq::addAABB(&aabb2);
 
-	deq::AABB aabb3;
-	aabb3.isStatic = true;
-	aabb3.left = 232;
-	aabb3.top = 168;
-	aabb3.width = 32;
-	aabb3.height = 32;
-	deq::CollisionChecker::getInstance().addAABB(&aabb3);
+	deq::AABB aabb3(232, 168, 32, 32, true);
+	deq::addAABB(&aabb3);
 
 	deq::Player player;
 

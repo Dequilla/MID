@@ -9,6 +9,10 @@ namespace deq
 	class AABB : public sf::FloatRect 
 	{
 	public:
+		AABB();
+		AABB(sf::Vector2f position, sf::Vector2f size, bool isStatic = true);
+		AABB(float left, float right, float width, float height, bool isStatic = true);
+
 		bool isStatic = true;
 	};
 
@@ -37,6 +41,5 @@ namespace deq
 	};
 
 	inline void drawAABB(sf::RenderWindow& window, const AABB& aabb, sf::Color color = sf::Color(255, 0, 0, 100));
-	inline float calcTwoPointDist(Point p1, Point p2);
-
+	void addAABB(deq::AABB* aabb);
 }

@@ -21,7 +21,7 @@ namespace deq
 		std::string m_currentAnimationID;
 
 		float m_animationCounter = 0;
-		float m_animationSpeedUnit = 1000; // This means milliseconds
+		float m_animationSpeedUnit = 1000; // This is the frame time's unit
 
 
 	public:

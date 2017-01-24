@@ -112,18 +112,21 @@ void deq::drawAABB(sf::RenderWindow& window, const AABB& aabb, sf::Color color)
 	window.draw(lines);
 }
 
-float deq::calcTwoPointDist(Point p1, Point p2)
+void deq::addAABB(deq::AABB* aabb)
 {
-	float distx = (p2.x - p1.x);
-	float disty = (p2.y - p1.y);
-	distx *= distx; // POW by 2
-	disty *= disty; // POW by 2
+	CollisionChecker::getInstance().addAABB(aabb);
+}
 
-	float temp = distx - disty;
-	if (temp < 0)
-		temp *= -1;
+deq::AABB::AABB() : sf::FloatRect(sf::Vector2f(0, 0), sf::Vector2f(32, 32))
+{
+}
 
-	float dist = sqrt(temp);
+deq::AABB::AABB(sf::Vector2f position, sf::Vector2f size, bool isStatic) : sf::FloatRect(position, size)
+{
+	this->isStatic = isStatic;
+}
 
-	return dist;
+deq::AABB::AABB(float left, float right, float width, float height, bool isStatic) : sf::FloatRect(sf::Vector2f(left, right), sf::Vector2f(width, height))
+{
+	this->isStatic = isStatic;
 }

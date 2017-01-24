@@ -5,13 +5,8 @@ deq::Player::Player()
 	deq::Sprite sprite;
 	sprite.setTexture(*deq::loadTexture("lights.png"));
 
-	m_aabb.left = 0;
-	m_aabb.top = 0;
-	m_aabb.width = 32;
-	m_aabb.height = 32;
-	m_aabb.isStatic = false;
-
-	CollisionChecker::getInstance().addAABB(&m_aabb);
+	m_aabb = deq::AABB(0, 0, 32, 32, false);
+	deq::addAABB(&m_aabb);
 
 	// Idle
 	sprite.addFrame(sf::IntRect(0, 128, 32, 32));
