@@ -3,7 +3,7 @@
 deq::Player::Player()
 {
 	deq::Sprite sprite;
-	sprite.setTexture(*deq::loadTexture("lights.png"));
+	sprite.setTexture(*deq::loadTexture("Assets/lights.png"));
 
 	m_aabb = deq::AABB(0, 0, 32, 32, false);
 	deq::addAABB(&m_aabb);
