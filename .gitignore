@@ -13,11 +13,11 @@
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
+# [Rr]elease/
+# [Rr]eleases/
 [Xx]64/
-[Xx]86/
-[Bb]uild/
+# [Xx]86/
+# [Bb]uild/
 bld/
 [Bb]in/
 [Oo]bj/
@@ -59,6 +59,7 @@ artifacts/
 *.tlb
 *.tli
 *.tlh
+*.tlog
 *.tmp
 *.tmp_proj
 *.log
@@ -66,6 +67,8 @@ artifacts/
 *.vssscc
 .builds
 *.pidb
+*.iobj
+*.ipdb
 *.svclog
 *.scc
 
