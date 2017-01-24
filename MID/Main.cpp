@@ -9,6 +9,7 @@ int main(int argc, char** argv)
 {
 	bool showDebug = false;
 	float debugCounter = 0.f;
+	int lastFps = 0;
 
 	sf::RenderWindow window;
 	window.create(sf::VideoMode(1280, 720), "MID");
@@ -27,7 +28,7 @@ int main(int argc, char** argv)
 	fpsText.setString(sf::String(std::to_string(0) + " fps"));
 	fpsText.setCharacterSize(10);
 	fpsText.setPosition(10, 10);
-	fpsText.setFillColor(sf::Color(255, 100, 100, 255));
+	fpsText.setFillColor(sf::Color(255, 0, 0, 255));
 
 	deq::Sprite sprite;
 	sprite.setTexture(*deq::loadTexture("Assets/lights.png"));
@@ -91,6 +92,8 @@ int main(int argc, char** argv)
 			{
 				debugCounter = 0;
 				int fps = 1 / deltaTime.asSeconds();
+				fps = (fps + lastFps) / 2;
+				lastFps = fps;
 				fpsText.setString(std::to_string(fps) + " fps");
 			}
 		}
