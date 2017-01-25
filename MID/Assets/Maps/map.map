@@ -1,0 +1,10 @@
+# e = entity
+# g = ground tile
+# sp = sprite		(ex: sp Assets/Sprites/sprite.spr)
+
+# Spritesheets
+sp 
+
+# entities
+e lay1 spr 
+  

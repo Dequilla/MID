@@ -2,6 +2,8 @@
 
 void deq::Entity::updateSprites(float deltaTime)
 {
+	if (!m_animated)
+		return;
 
 	if (m_sprites.size() == 0)
 		return;

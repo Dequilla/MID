@@ -1,0 +1,20 @@
+# PLAYER SPRITE
+
+ss Assets/Spritesheets/lights.png
+
+fr idle1 0, 128, 32, 32
+fr idle2 32, 128, 32, 32 
+fr idle3 64, 128, 32, 32 
+
+fr left1 0, 160, 32, 32
+fr left2 32, 160, 32, 32
+fr left3 64, 160, 32, 32
+
+fr right1 0, 192, 32, 32
+fr right2 32, 192, 32, 32
+fr right3 64, 192, 32, 32
+
+an left true 150 3 left1 left2 left3
+an right true 150 3 right1 right2 right3
+
+an idle true 150 3 idle1 idle2 idle3

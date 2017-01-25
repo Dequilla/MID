@@ -16,6 +16,8 @@ namespace deq
 		float x = 0;
 		float y = 0;
 
+		bool m_animated = false;
+
 	public:
 
 		virtual void update(float deltaTime) = 0;

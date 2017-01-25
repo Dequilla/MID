@@ -1,13 +1,29 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+#include <string>
 #include <vector>
+#include <fstream>
+#include <stdarg.h>
 #include <unordered_map>
 
+#include "Textures.h"
 #include "Defines.h"
 
 namespace deq
 {
+
+	struct Animation : public std::vector<int>
+	{
+	public:
+		Animation() : std::vector<int>() {}
+		Animation(bool loop, int frameTime, int count, ...);
+
+		void addAnimation(int count, ...);
+
+		int frameTime = 200;
+		bool loop = false;
+	};
 
 	class Sprite : public sf::Sprite
 	{
@@ -16,22 +32,25 @@ namespace deq
 		int m_currentFrame = 1;
 
 		// Animations use the defined frames
-		std::unordered_map<std::string, std::vector<int>> m_animations;
-		std::vector<int> m_currentAnimation;
+		std::unordered_map<std::string, Animation> m_animations;
+		Animation m_currentAnimation;
 		std::string m_currentAnimationID;
 
 		float m_animationCounter = 0;
 		float m_animationSpeedUnit = 1000; // This is the frame time's unit
 
-
 	public:
-		int frameTime = 100;
+		//int frameTime = 100;
 		bool paused = false;
-		bool loop = true;
+		//bool loop = true;
+
+		Sprite() : sf::Sprite() {}
+		Sprite(std::string path);
+		void loadFromFile(std::string path);
 
 		void update(float deltaTime);
 
-		void addAnimation(std::string id, std::vector<int> animation);
+		void addAnimation(std::string id, deq::Animation animation);
 		void setAnimation(std::string id);
 
 		void addFrames(std::vector<sf::IntRect> frames);

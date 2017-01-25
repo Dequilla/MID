@@ -9,7 +9,6 @@ int main(int argc, char** argv)
 {
 	bool showDebug = false;
 	float debugCounter = 0.f;
-	int lastFps = 0;
 
 	sf::RenderWindow window;
 	window.create(sf::VideoMode(1280, 720), "MID");
@@ -30,15 +29,8 @@ int main(int argc, char** argv)
 	fpsText.setPosition(10, 10);
 	fpsText.setFillColor(sf::Color(255, 0, 0, 255));
 
-	deq::Sprite sprite;
-	sprite.setTexture(*deq::loadTexture("Assets/lights.png"));
-	sprite.setPosition(200, 200);
-	sprite.addFrame(sf::IntRect(96, 32, 32, 32));
-	sprite.addFrame(sf::IntRect(128, 32, 32, 32));
-	sprite.addFrame(sf::IntRect(160, 32, 32, 32));
-	sprite.addAnimation("burn", std::vector<int>({ 1, 2, 3 }));
-	sprite.addAnimation("none", std::vector<int>({ 1 }));
-	sprite.setAnimation("burn");
+	deq::Sprite testSpr("Assets/Sprites/sprite.spr");
+	testSpr.setScale(2.f, 2.f);
 
 	deq::AABB aabb(200, 200, 32, 32, true);
 	deq::addAABB(&aabb);
@@ -57,7 +49,7 @@ int main(int argc, char** argv)
 
 		player.update(deltaTime.asSeconds());
 		player.updateSprites(deltaTime.asSeconds());
-		sprite.update(deltaTime.asSeconds());
+		testSpr.update(deltaTime.asSeconds());
 
 		// Check collisions
 		deq::CollisionChecker::getInstance().checkCollisions();
@@ -79,21 +71,21 @@ int main(int argc, char** argv)
 
 		window.clear();
 
-		window.draw(sprite);
+		window.draw(testSpr);
 		player.draw(window);
 
 		if (showDebug)
 		{
+			// Collision boxes
 			deq::CollisionChecker::getInstance().drawDebug(window);
-			window.draw(fpsText);
 
+			// Fps counter (avrage)
+			window.draw(fpsText);
 			debugCounter += 1000.f * deltaTime.asSeconds();
-			if (debugCounter >= 1000.f) // Once per second
+			if (debugCounter >= 500.f) // Once per second
 			{
 				debugCounter = 0;
 				int fps = 1 / deltaTime.asSeconds();
-				fps = (fps + lastFps) / 2;
-				lastFps = fps;
 				fpsText.setString(std::to_string(fps) + " fps");
 			}
 		}

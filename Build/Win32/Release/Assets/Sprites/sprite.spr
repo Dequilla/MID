@@ -1,0 +1,16 @@
+# template sprite
+# ss = spritesheet  (ex: ss Assets/spritesheet.png) // Sprites can only use one sheet, if you add two, the latest one will be used
+# fr = frame	    (ex: fr name posx posy width height)
+# an = animation	(ex: an name ifLooped frameTimeInMilliSeconds frameCount frame1 frame2 frame3 etc...) // The latest added animation will be active
+
+# spritesheet
+ss Assets/Spritesheets/spritesheet.png
+
+fr frame1 0 0 16 16
+fr frame2 16 0 16 16 
+fr frame3 32 0 16 16 
+fr frame4 48 0 16 16 
+fr frame5 64 0 16 16 
+
+an idle false 500 1 frame3
+an move true 500 5 frame1 frame2 frame3 frame4 frame5
