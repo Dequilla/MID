@@ -3,22 +3,26 @@
 
 #include <vector>
 #include <string>
+#include <fstream>
+#include <unordered_map>
 
 #include "Entity.h"
+#include "Tile.h"
 
 namespace deq
 {
 
 	class Map
 	{
-		// TEMP TYPEDEF TODO
-		typedef int Tile;
 		std::vector<Tile> m_groundLayer;
 
 		std::vector<std::vector<Entity>> m_entityLayers;
 
 	public:
-		void loadMap(std::string path);
+		Map() {}
+		Map(const std::string& path);
+
+		void loadMap(const std::string& path);
 
 		void drawMap(sf::RenderWindow& window);
 

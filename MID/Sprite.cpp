@@ -1,11 +1,11 @@
 #include "Sprite.h"
 
-deq::Sprite::Sprite(std::string path)
+deq::Sprite::Sprite(const std::string& path)
 {
 	loadFromFile(path);
 }
 
-void deq::Sprite::loadFromFile(std::string path)
+void deq::Sprite::loadFromFile(const std::string& path)
 {
 	std::unordered_map<std::string, int> frames;
 	int totalFrames = 1;
@@ -169,6 +169,12 @@ void deq::Sprite::setFrame(int index)
 	this->setTextureRect(m_frames.at(index - 1));
 }
 
+void deq::Sprite::setSize(float width, float height)
+{
+	sf::FloatRect bounds = this->getGlobalBounds();
+	this->setScale(width / bounds.width, height / bounds.height);
+}
+
 deq::Animation::Animation(bool loop, int frameTime, int count, ...)
 {
 	this->loop = loop;
@@ -186,7 +192,7 @@ deq::Animation::Animation(bool loop, int frameTime, int count, ...)
 
 }
 
-void deq::Animation::addAnimation(int count, ...)
+void deq::Animation::setAnimation(int count, ...)
 {
 	va_list args;
 	va_start(args, count);

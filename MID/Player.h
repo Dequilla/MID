@@ -14,7 +14,7 @@ namespace deq
 		bool m_moveLeft = false;
 		bool m_moveRight = false;
 
-		float m_speed = 100;
+		float m_speed = 50;
 
 		deq::AABB m_aabb;
 

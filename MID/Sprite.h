@@ -19,7 +19,7 @@ namespace deq
 		Animation() : std::vector<int>() {}
 		Animation(bool loop, int frameTime, int count, ...);
 
-		void addAnimation(int count, ...);
+		void setAnimation(int count, ...);
 
 		int frameTime = 200;
 		bool loop = false;
@@ -45,8 +45,8 @@ namespace deq
 		//bool loop = true;
 
 		Sprite() : sf::Sprite() {}
-		Sprite(std::string path);
-		void loadFromFile(std::string path);
+		Sprite(const std::string& path);
+		void loadFromFile(const std::string& path);
 
 		void update(float deltaTime);
 
@@ -58,6 +58,8 @@ namespace deq
 		void addFrame(int x, int y, int w, int h);
 
 		void setFrame(int index);
+
+		void setSize(float width, float height);
 	};
 
 }

@@ -146,6 +146,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Textures.cpp" />
+    <ClCompile Include="Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collisions.h" />
@@ -155,13 +156,17 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Textures.h" />
+    <ClInclude Include="Tile.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\sprite.spr" />
+    <None Include="Assets\Maps\map.map" />
+    <None Include="Assets\Sprites\grass_stump.spr" />
+    <None Include="Assets\Sprites\grass_empty.spr" />
+    <None Include="Assets\Sprites\grass_flower.spr" />
+    <None Include="Assets\Sprites\grass_rock.spr" />
+    <None Include="Assets\Sprites\grass_stick.spr" />
     <None Include="Assets\Sprites\player.spr" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Assets\map.map" />
+    <None Include="Assets\Sprites\sprite.spr" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

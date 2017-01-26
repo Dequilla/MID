@@ -1,13 +1,68 @@
 #include "Map.h"
 
-void deq::Map::loadMap(std::string path)
+deq::Map::Map(const std::string& path)
 {
+	loadMap(path);
+}
+
+void deq::Map::loadMap(const std::string& path)
+{
+	std::unordered_map<std::string, deq::Sprite> spritesContainer;
+
+	std::ifstream file(path);
+	std::string line;
+	while (std::getline(file, line))
+	{
+
+		if (line.empty())
+			continue;
+
+		auto items = deq::split(line, ' ');
+		std::string id = items.at(0);
+		if (id.at(0) == '#')
+			continue;
+
+		if (id == "sp")
+		{
+			std::string name = items.at(1);
+			Sprite sprite(items.at(2)); // Path
+
+			spritesContainer.emplace(name, sprite);
+		}
+		else if (id == "gt") // Ground tile
+		{
+
+			std::string spriteName = items.at(1);
+			int x = std::stoi(items.at(2));
+			int y = std::stoi(items.at(3));
+			int width = std::stoi(items.at(4));
+			int height = std::stoi(items.at(5));
+
+			if (spritesContainer.count(spriteName) < 1)
+			{
+				assertMsg("Failed to find defined sprite: " + spriteName + " in file: " + path);
+				continue;
+			}
+
+			deq::Sprite sprite = spritesContainer.at(spriteName);
+			sprite.setPosition(x, y);
+			sprite.setSize(width, height);
+
+			Tile tile;
+			tile.copySprite(sprite);
+			this->m_groundLayer.push_back(tile);
+		}
+	}
+
 }
 
 void deq::Map::drawMap(sf::RenderWindow& window)
 {
 
-	// DRAW GROUND TILES TODO TODO
+	for (auto &tile : m_groundLayer)
+	{
+		tile.draw(window);
+	}
 
 	// Entity layers
 	for (auto &layer : m_entityLayers)
