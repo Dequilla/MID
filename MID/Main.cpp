@@ -32,45 +32,11 @@ int main(int argc, char** argv)
 
 	deq::Map map("Assets/Maps/map.map");
 
-	deq::AABB aabb(48, 0, 16, 16, true);
-	deq::addAABB(&aabb);
-
-	deq::AABB aabb2(48, 16, 16, 16, true);
-	deq::addAABB(&aabb2);
-
-	deq::AABB aabb3(48, 32, 16, 16, true);
-	deq::addAABB(&aabb3);
-
-	deq::AABB aabb4(48, 48, 16, 16, true);
-	deq::addAABB(&aabb4);
-
-	deq::AABB aabb5(48, 64, 16, 16, true);
-	deq::addAABB(&aabb5);
-
-	deq::AABB aabb6(48, 80, 16, 16, true);
-	deq::addAABB(&aabb6);
-
-	deq::AABB aabb7(48, 96, 16, 16, true);
-	deq::addAABB(&aabb7);
-
-	deq::AABB aabb8(0, 96, 16, 16, true);
-	deq::addAABB(&aabb8);
-
-	deq::AABB aabb9(16, 96, 16, 16, true);
-	deq::addAABB(&aabb9); 
-	
-	deq::AABB aabb10(32, 96, 16, 16, true);
-	deq::addAABB(&aabb10);
-
-	deq::Player player;
-
 	while (window.isOpen())
 	{
 		deltaTime = clock.restart();
 
 		map.updateMap(deltaTime.asSeconds());
-		player.update(deltaTime.asSeconds());
-		player.updateSprites(deltaTime.asSeconds());
 
 		// Check collisions
 		deq::CollisionChecker::getInstance().checkCollisions();
@@ -78,7 +44,7 @@ int main(int argc, char** argv)
 		sf::Event input;
 		while (window.pollEvent(input))
 		{
-			player.checkInput(input);
+			map.checkInput(input);
 
 			if (input.type == sf::Event::Closed)
 				window.close();
@@ -94,14 +60,11 @@ int main(int argc, char** argv)
 
 		window.setView(view);
 		map.drawMap(window);
-		player.draw(window);
 
 		if (showDebug)
 		{
-			// Collision boxes
 			deq::CollisionChecker::getInstance().drawDebug(window);
 
-			// Fps counter (avrage)
 			window.setView(fpsView);
 			window.draw(fpsText);
 			debugCounter += 1000.f * deltaTime.asSeconds();

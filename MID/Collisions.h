@@ -24,10 +24,14 @@ namespace deq
 		std::vector<AABB*> m_staticColliders;
 		std::vector<AABB*> m_dynamicColliders;
 
+		std::vector<AABB*> m_copiedColliders;
+
 	public:
 		CollisionChecker() {}
+		~CollisionChecker();
 
-		void addAABB(AABB* AABB);
+		void addAABB(AABB* aabb);
+		void copyAABB(AABB aabb);
 
 		void checkCollisions();
 
@@ -42,4 +46,5 @@ namespace deq
 
 	inline void drawAABB(sf::RenderWindow& window, const AABB& aabb, sf::Color color = sf::Color(255, 0, 0, 100));
 	void addAABB(deq::AABB* aabb);
+	void copyAABB(deq::AABB aabb);
 }

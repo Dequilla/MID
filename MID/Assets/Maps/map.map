@@ -24,8 +24,7 @@ gt grass_stump  48 16 16 16
 gt grass_empty  0  32 16 16
 gt grass_stick  16 32 16 16
 gt grass_empty  32 32 16 16
-
-gt grass_rock  48 32 16 16
+gt grass_empty  48 32 16 16
 
 gt grass_empty  0  48 16 16
 gt grass_empty  16 48 16 16
@@ -49,3 +48,17 @@ gt grass_rock   0  96 16 16
 gt grass_stump  16 96 16 16
 gt grass_rock   32 96 16 16
 gt grass_rock   48 96 16 16
+
+
+# Hitboxes
+hb true 48 0  16 16 
+hb true 48 16 16 16
+hb true 48 48 16 16
+
+hb true 48 64 16 16
+hb true 48 80 16 16
+hb true 0  96 16 16
+
+hb true 16 96 16 16
+hb true 32 96 16 16
+hb true 48 96 16 16

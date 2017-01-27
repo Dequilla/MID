@@ -3,9 +3,9 @@
 deq::Player::Player()
 {
 	deq::Sprite sprite("Assets/Sprites/player.spr");
-	sprite.setSize(16, 16);
+	sprite.setSize(14, 14);
 
-	m_aabb = deq::AABB(0, 0, 16, 16, false);
+	m_aabb = deq::AABB(0, 0, 14, 14, false);
 	deq::addAABB(&m_aabb);
 
 	this->m_animated = true;

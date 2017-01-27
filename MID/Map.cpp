@@ -33,10 +33,10 @@ void deq::Map::loadMap(const std::string& path)
 		{
 
 			std::string spriteName = items.at(1);
-			int x = std::stoi(items.at(2));
-			int y = std::stoi(items.at(3));
-			int width = std::stoi(items.at(4));
-			int height = std::stoi(items.at(5));
+			float x = std::stof(items.at(2));
+			float y = std::stof(items.at(3));
+			float width = std::stof(items.at(4));
+			float height = std::stof(items.at(5));
 
 			if (spritesContainer.count(spriteName) < 1)
 			{
@@ -52,6 +52,21 @@ void deq::Map::loadMap(const std::string& path)
 			tile.copySprite(sprite);
 			this->m_groundLayer.push_back(tile);
 		}
+		else if (id == "hb")
+		{
+			bool isStatic = stringToBool(items.at(1));
+			float x = std::stof(items.at(2));
+			float y = std::stof(items.at(3));
+			float width = std::stof(items.at(4));
+			float height = std::stof(items.at(5));
+
+			AABB aabb(x, y, width, height, isStatic);
+			copyAABB(aabb); // Copies aabb to the collision checker
+		}
+		else if (id == "en")
+		{
+
+		}
 	}
 
 }
@@ -63,6 +78,9 @@ void deq::Map::drawMap(sf::RenderWindow& window)
 	{
 		tile.draw(window);
 	}
+
+	// TEMP we really want player to be drawn at a z value inbetween entities
+	player.draw(window);
 
 	// Entity layers
 	for (auto &layer : m_entityLayers)
@@ -80,6 +98,9 @@ void deq::Map::drawMap(sf::RenderWindow& window)
 void deq::Map::updateMap(float deltaTime)
 {
 
+	player.update(deltaTime);
+	player.updateSprites(deltaTime);
+
 	for (auto &layer : m_entityLayers)
 	{
 		for (auto &entity : layer)
@@ -89,4 +110,9 @@ void deq::Map::updateMap(float deltaTime)
 		}
 	}
 
+}
+
+void deq::Map::checkInput(const sf::Event& input)
+{
+	player.checkInput(input);
 }

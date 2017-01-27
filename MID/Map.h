@@ -6,6 +6,8 @@
 #include <fstream>
 #include <unordered_map>
 
+#include "Collisions.h"
+#include "Player.h"
 #include "Entity.h"
 #include "Tile.h"
 
@@ -18,6 +20,8 @@ namespace deq
 
 		std::vector<std::vector<Entity>> m_entityLayers;
 
+		deq::Player player;
+
 	public:
 		Map() {}
 		Map(const std::string& path);
@@ -27,6 +31,8 @@ namespace deq
 		void drawMap(sf::RenderWindow& window);
 
 		void updateMap(float deltaTime);
+
+		void checkInput(const sf::Event& input);
 	};
 
 }
