@@ -1,0 +1,19 @@
+# spritesheet
+ss Assets/ProgramResources/button.png
+fr leftUnpressed 0 0 16 16
+fr leftPressed 0 16 16 16
+
+fr centerUnpressed 16 0 16 16
+fr centerPressed 16 16 16 16
+
+fr rightUnpressed 32 0  16 16
+fr rightPressed 32 16 16 16
+
+an leftUnpressed false 10 1 leftUnpressed
+an leftPressed false 10 1 leftPressed
+
+an centerUnpressed false 10 1 centerUnpressed
+an centerPressed false 10 1 centerPressed
+
+an rightUnpressed false 10 1 rightUnpressed
+an rightPressed false 10 1 rightPressed

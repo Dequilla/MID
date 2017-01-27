@@ -1,0 +1,4 @@
+# spritesheet
+ss Assets/ProgramResources/panel.png
+fr frame 0 0 320 720
+an idle false 1000 1 frame
