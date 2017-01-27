@@ -2,33 +2,13 @@
 
 deq::Player::Player()
 {
-	deq::Sprite sprite;
-	sprite.setTexture(*deq::loadTexture("Assets/lights.png"));
+	deq::Sprite sprite("Assets/Sprites/player.spr");
+	sprite.setSize(14, 14);
 
-	m_aabb = deq::AABB(0, 0, 32, 32, false);
+	m_aabb = deq::AABB(0, 0, 14, 14, false);
 	deq::addAABB(&m_aabb);
 
-	// Idle
-	sprite.addFrame(sf::IntRect(0, 128, 32, 32));
-	sprite.addFrame(sf::IntRect(32, 128, 32, 32));
-	sprite.addFrame(sf::IntRect(64, 128, 32, 32));
-
-	// Left
-	sprite.addFrame(sf::IntRect(0, 160, 32, 32));
-	sprite.addFrame(sf::IntRect(32, 160, 32, 32));
-	sprite.addFrame(sf::IntRect(64, 160, 32, 32));
-
-	// Right
-	sprite.addFrame(sf::IntRect(0, 192, 32, 32));
-	sprite.addFrame(sf::IntRect(32, 192, 32, 32));
-	sprite.addFrame(sf::IntRect(64, 192, 32, 32));
-
-	sprite.addAnimation("idle", std::vector<int>({ 1, 2, 3 }));
-	sprite.addAnimation("left", std::vector<int>({ 4, 5, 6 }));
-	sprite.addAnimation("right", std::vector<int>({ 7, 8, 9 }));
-
-	sprite.setAnimation("idle");
-	sprite.frameTime = 150;
+	this->m_animated = true;
 
 	this->m_sprites.emplace_back(sprite);
 }

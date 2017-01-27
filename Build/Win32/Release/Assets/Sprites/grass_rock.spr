@@ -1,0 +1,3 @@
+ss Assets/Spritesheets/spritesheet.png
+fr frame 16, 0, 16, 16
+an idle false 1000 1 frame

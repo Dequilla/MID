@@ -1,0 +1,51 @@
+# en = entity
+
+# sprites (ex: sp name path);
+sp grass_empty Assets/Sprites/grass_empty.spr
+sp grass_stick Assets/Sprites/grass_stick.spr
+sp grass_flower Assets/Sprites/grass_flower.spr
+sp grass_rock Assets/Sprites/grass_rock.spr
+sp grass_stump Assets/Sprites/grass_stump.spr
+
+# ground (ex: gt spriteName x y width height)
+
+gt grass_empty  0  0 16 16
+gt grass_empty  16 0 16 16
+gt grass_flower 32 0 16 16
+
+gt grass_rock   48 0 16 16
+
+gt grass_empty  0  16 16 16
+gt grass_empty  16 16 16 16
+gt grass_empty  32 16 16 16
+
+gt grass_stump  48 16 16 16
+
+gt grass_empty  0  32 16 16
+gt grass_stick  16 32 16 16
+gt grass_empty  32 32 16 16
+
+gt grass_rock  48 32 16 16
+
+gt grass_empty  0  48 16 16
+gt grass_empty  16 48 16 16
+gt grass_empty  32 48 16 16
+
+gt grass_rock   48 48 16 16
+
+gt grass_flower 0  64 16 16
+gt grass_empty  16 64 16 16
+gt grass_stick  32 64 16 16
+
+gt grass_stump   48 64 16 16
+
+gt grass_empty  0  80 16 16
+gt grass_empty  16 80 16 16
+gt grass_empty  32 80 16 16
+
+gt grass_rock   48 80 16 16
+
+gt grass_rock   0  96 16 16
+gt grass_stump  16 96 16 16
+gt grass_rock   32 96 16 16
+gt grass_rock   48 96 16 16

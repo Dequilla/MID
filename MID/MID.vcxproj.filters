@@ -33,6 +33,12 @@
     <ClCompile Include="Textures.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Defines.h">
@@ -53,5 +59,37 @@
     <ClInclude Include="Textures.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Sprites\player.spr">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Assets\Maps\map.map">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Assets\Sprites\sprite.spr">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Assets\Sprites\grass_empty.spr">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Assets\Sprites\grass_flower.spr">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Assets\Sprites\grass_stick.spr">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Assets\Sprites\grass_rock.spr">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Assets\Sprites\grass_stump.spr">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

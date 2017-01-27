@@ -1,15 +1,30 @@
 #include "Collisions.h"
 
-void deq::CollisionChecker::addAABB(AABB* AABB)
+deq::CollisionChecker::~CollisionChecker()
 {
-	if (AABB->isStatic)
+	for (auto aabb : m_copiedColliders)
 	{
-		m_staticColliders.push_back(AABB);
+		delete aabb;
+	}
+}
+
+void deq::CollisionChecker::addAABB(AABB* aabb)
+{
+	if (aabb->isStatic)
+	{
+		m_staticColliders.push_back(aabb);
 	}
 	else
 	{
-		m_dynamicColliders.push_back(AABB);
+		m_dynamicColliders.push_back(aabb);
 	}
+}
+
+void deq::CollisionChecker::copyAABB(AABB aabb)
+{
+	AABB* collider = new AABB(aabb);
+	m_copiedColliders.push_back(collider);
+	addAABB(collider);
 }
 
 void deq::CollisionChecker::checkCollisions()
@@ -115,6 +130,11 @@ void deq::drawAABB(sf::RenderWindow& window, const AABB& aabb, sf::Color color)
 void deq::addAABB(deq::AABB* aabb)
 {
 	CollisionChecker::getInstance().addAABB(aabb);
+}
+
+void deq::copyAABB(deq::AABB aabb)
+{
+	CollisionChecker::getInstance().copyAABB(aabb);
 }
 
 deq::AABB::AABB() : sf::FloatRect(sf::Vector2f(0, 0), sf::Vector2f(32, 32))

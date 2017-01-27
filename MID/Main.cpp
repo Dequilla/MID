@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 
+#include "Map.h"
 #include "Sprite.h"
 #include "Player.h"
 #include "Textures.h"
@@ -9,14 +10,13 @@ int main(int argc, char** argv)
 {
 	bool showDebug = false;
 	float debugCounter = 0.f;
-	int lastFps = 0;
 
 	sf::RenderWindow window;
 	window.create(sf::VideoMode(1280, 720), "MID");
-
-	sf::View view(sf::FloatRect(0.f, 0.f, 640.f, 360.f));
-	window.setView(view);
 	//window.setVerticalSyncEnabled(true);
+
+	sf::View view(sf::FloatRect(0.f, 0.f, 256.f, 144.f));
+	sf::View fpsView(sf::FloatRect(0.f, 0.f, 1920.f, 1080.f));
 
 	sf::Clock clock;
 	sf::Time deltaTime;
@@ -26,38 +26,17 @@ int main(int argc, char** argv)
 	sf::Text fpsText;
 	fpsText.setFont(font);
 	fpsText.setString(sf::String(std::to_string(0) + " fps"));
-	fpsText.setCharacterSize(10);
+	fpsText.setCharacterSize(34);
 	fpsText.setPosition(10, 10);
 	fpsText.setFillColor(sf::Color(255, 0, 0, 255));
 
-	deq::Sprite sprite;
-	sprite.setTexture(*deq::loadTexture("Assets/lights.png"));
-	sprite.setPosition(200, 200);
-	sprite.addFrame(sf::IntRect(96, 32, 32, 32));
-	sprite.addFrame(sf::IntRect(128, 32, 32, 32));
-	sprite.addFrame(sf::IntRect(160, 32, 32, 32));
-	sprite.addAnimation("burn", std::vector<int>({ 1, 2, 3 }));
-	sprite.addAnimation("none", std::vector<int>({ 1 }));
-	sprite.setAnimation("burn");
-
-	deq::AABB aabb(200, 200, 32, 32, true);
-	deq::addAABB(&aabb);
-
-	deq::AABB aabb2(232, 200, 32, 32, true);
-	deq::addAABB(&aabb2);
-
-	deq::AABB aabb3(232, 168, 32, 32, true);
-	deq::addAABB(&aabb3);
-
-	deq::Player player;
+	deq::Map map("Assets/Maps/map.map");
 
 	while (window.isOpen())
 	{
 		deltaTime = clock.restart();
 
-		player.update(deltaTime.asSeconds());
-		player.updateSprites(deltaTime.asSeconds());
-		sprite.update(deltaTime.asSeconds());
+		map.updateMap(deltaTime.asSeconds());
 
 		// Check collisions
 		deq::CollisionChecker::getInstance().checkCollisions();
@@ -65,7 +44,7 @@ int main(int argc, char** argv)
 		sf::Event input;
 		while (window.pollEvent(input))
 		{
-			player.checkInput(input);
+			map.checkInput(input);
 
 			if (input.type == sf::Event::Closed)
 				window.close();
@@ -79,21 +58,20 @@ int main(int argc, char** argv)
 
 		window.clear();
 
-		window.draw(sprite);
-		player.draw(window);
+		window.setView(view);
+		map.drawMap(window);
 
 		if (showDebug)
 		{
 			deq::CollisionChecker::getInstance().drawDebug(window);
-			window.draw(fpsText);
 
+			window.setView(fpsView);
+			window.draw(fpsText);
 			debugCounter += 1000.f * deltaTime.asSeconds();
-			if (debugCounter >= 1000.f) // Once per second
+			if (debugCounter >= 500.f) // Once per second
 			{
 				debugCounter = 0;
 				int fps = 1 / deltaTime.asSeconds();
-				fps = (fps + lastFps) / 2;
-				lastFps = fps;
 				fpsText.setString(std::to_string(fps) + " fps");
 			}
 		}
